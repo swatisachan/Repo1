@@ -1,0 +1,219 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red128\green128\blue128;\red0\green0\blue128;\red0\green128\blue0;
+\red128\green0\blue0;}
+{\*\expandedcolortbl;;\csgenericrgb\c50196\c50196\c50196;\csgenericrgb\c0\c0\c50196;\csgenericrgb\c0\c50196\c0;
+\csgenericrgb\c50196\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs22 \cf2 <?xml version="1.0" ?>\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf3 <project\cf0  \cf3 name=\cf4 "SSO-Hunter"\cf0  \cf3 default=\cf4 "unit-test"\cf0  \cf3 basedir=\cf4 "./"\cf3 >\cf0 \
+\
+	\cf3 <property\cf0  \cf3 name=\cf4 "build.dir"\cf0  \cf3 value=\cf4 "$\{basedir\}/build"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "src.dir"\cf0  \cf3 value=\cf4 "src"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "lib.dir"\cf0  \cf3 value=\cf4 "lib"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 file=\cf4 "./config/env/dev-env-plist.config"\cf0  \cf3 />\cf0 \
+\
+	\cf3 <include\cf0  \cf3 file=\cf4 "./capsules/build.xml"\cf0  \cf3 as=\cf4 "ssocapsule"\cf0  \cf3 />\cf0 \
+\
+	\
+	\cf3 <target\cf0  \cf3 name=\cf4 "init"\cf3 >\cf0 \
+		\cf3 <mkdir\cf0  \cf3 dir=\cf4 "$\{build.dir\}"\cf0  \cf3 />\cf0 \
+		\cf3 <antcall\cf0  \cf3 target=\cf4 "ssocapsule.createCapsule"\cf0  \cf3 />\cf0 		\
+		\cf3 <delete\cf0  \cf3 file=\cf4 "./lib/DS/DSSSOClient.jar"\cf3 />\cf0 \
+	\cf3 </target>\cf0 \
+\
+	\cf3 <target\cf0  \cf3 name=\cf4 "clean"\cf3 >\cf0 \
+		\cf3 <delete\cf0  \cf3 dir=\cf4 "$\{build.dir\}"\cf0  \cf3 />\cf0 \
+	\cf3 </target>\cf0 \
+\
+	\cf3 <target\cf0  \cf3 name=\cf4 "compile"\cf0  \cf3 depends=\cf4 "init"\cf3 >\cf0 \
+		\cf3 <echo\cf0  \cf3 message=\cf4 "Java version used - $\{java.version\}"\cf0  \cf3 />\cf0 \
+\
+		\cf3 <javac\cf0  \cf3 srcdir=\cf4 "$\{src.dir\}"\cf0  \cf3 destdir=\cf4 "$\{build.dir\}"\cf0  \cf3 debug=\cf4 "on"\cf0  \cf3 fork=\cf4 "yes"\cf0  \cf3 memoryInitialSize=\cf4 "64m"\cf0  \cf3 memoryMaximumSize=\cf4 "256m"\cf0  \cf3 includeantruntime=\cf4 "false"\cf3 >\cf0 \
+\
+			\cf3 <classpath\cf0  \cf3 refid=\cf4 "classpath"\cf0  \cf3 />\cf0 \
+			\cf3 <include\cf0  \cf3 name=\cf4 "com/**/*.java"\cf0  \cf3 />\cf0 \
+			\cf3 <include\cf0  \cf3 name=\cf4 "poc/**/*.java"\cf0  \cf3 />\cf0 \
+		\cf3 </javac>\cf0 \
+	\cf3 </target>\cf0 \
+\
+	\cf3 <include\cf0  \cf3 file=\cf4 "./Framework/build-hunter.xml"\cf0  \cf3 as=\cf4 "hunterBuild"\cf0  \cf3 />\cf0 \
+	\cf5 <!--<property name="testSuiteDir" value="data/testsuites" /> -->\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "hLogLevel"\cf0  \cf3 value=\cf4 "debug"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "jsonOutput"\cf0  \cf3 value=\cf4 "true"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "H_debugRequest"\cf0  \cf3 value=\cf4 "true"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "hDebugResponse"\cf0  \cf3 value=\cf4 "true"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "hOptimizeReport"\cf0  \cf3 value=\cf4 "false"\cf0  \cf3 />\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf5 <!--    <property name="serialExecution" value="true" /> -->\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "allure.report.remove.attachments"\cf0  \cf3 value=\cf4 "nothing"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "src"\cf0  \cf3 location=\cf4 "capsules/src"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "build"\cf0  \cf3 location=\cf4 "build"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "lib"\cf0  \cf3 location=\cf4 "lib"\cf0  \cf3 />\cf0 \
+\cf5 <!--	<property name="endPointUrlPrefix" value="http://$\{sso_server_name\}:$\{sso_server_port\}/snkp/CommonServlet" /> -->\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "endPointUrlPrefix"\cf0  \cf3 value=\cf4 "http://$\{sso_server_name\}:$\{sso_server_port\}/snkp/CommonServlet"\cf0  \cf3 />\cf0 \
+\
+	\cf3 <property\cf0  \cf3 name=\cf4 "idms-env"\cf0  \cf3 value=\cf4 "qed1"\cf0  \cf3 />\cf0 \
+	\cf5 <!-- In case if not set, dafault to dev-->\cf0 \
+\
+	\cf3 <property\cf0  \cf3 name=\cf4 "QA_ENV"\cf0  \cf3 value=\cf4 "$\{idms-env\}"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "server_in_test_mode"\cf0  \cf3 value=\cf4 "false"\cf0  \cf3 />\cf0 \
+\
+	\cf3 <property\cf0  \cf3 file=\cf4 "./test_config/env/$\{idms-env\}-env.properties"\cf0  \cf3 />\cf0 \
+\
+	\cf3 <property\cf0  \cf3 name=\cf4 "checkrespforsvr"\cf0  \cf3 value=\cf4 "true"\cf0  \cf3 />\cf0 \
+	\cf5 <!-- Flag for checking a response whether response is from DSAS or I3\cf0 \
+\cf5 -->\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "dsas_server_identifier"\cf0  \cf3 value=\cf4 ".*$\{dsas_server_name\}.*"\cf0  \cf3 />\cf0 \
+	\cf3 <property\cf0  \cf3 name=\cf4 "i3_server_identifier"\cf0  \cf3 value=\cf4 ".*$\{i3_server_name\}.*"\cf0  \cf3 />\cf0 \
+\
+	\cf3 <property\cf0  \cf3 name=\cf4 "checkincouch"\cf0  \cf3 value=\cf4 "true"\cf0  \cf3 />\cf0 \
+	\cf5 <!-- Flag for checking a key in CB -->\cf0 \
+\
+	\cf3 <mkdir\cf0  \cf3 dir=\cf4 "$\{build\}"\cf0  \cf3 />\cf0 \
+\
+	\cf3 <target\cf0  \cf3 name=\cf4 "copyconfig"\cf0  \cf3 description=\cf4 "Copy Environment specific configuration"\cf3 >\cf0 \
+		\cf3 <echo\cf0  \cf3 message=\cf4 "IDMS Environment:: $\{idms-env\}"\cf0  \cf3 />\cf0 \
+\
+		\cf5 <!--<copy file="./conf/env/DataMapper-$\{idms-env\}.yaml" tofile="./conf/DataMapper.yaml" overwrite="true" force="true" />-->\cf0 \
+\
+		\cf3 <condition\cf0  \cf3 property=\cf4 "isdevinstance"\cf3 >\cf0 \
+			\cf3 <or>\cf0 \
+				\cf3 <equals\cf0  \cf3 arg1=\cf4 "$\{i3_env\}"\cf0  \cf3 arg2=\cf4 "DEV-HTTP"\cf0  \cf3 />\cf0 \
+				\cf3 <equals\cf0  \cf3 arg1=\cf4 "$\{i3_env\}"\cf0  \cf3 arg2=\cf4 "QA-HTTP"\cf0  \cf3 />\cf0 \
+				\cf3 <equals\cf0  \cf3 arg1=\cf4 "$\{i3_env\}"\cf0  \cf3 arg2=\cf4 "QA-HTTPS"\cf0  \cf3 />\cf0 \
+				\cf3 <equals\cf0  \cf3 arg1=\cf4 "$\{idms-env\}"\cf0  \cf3 arg2=\cf4 "dev"\cf0  \cf3 />\cf0 \
+				\cf3 <equals\cf0  \cf3 arg1=\cf4 "$\{idms-env\}"\cf0  \cf3 arg2=\cf4 "i3ci"\cf0  \cf3 />\cf0 \
+			\cf3 </or>\cf0 \
+		\cf3 </condition>\cf0 \
+	\cf3 </target>\cf0 \
+	\cf3 <target\cf0  \cf3 name=\cf4 "setserverurl"\cf0  \cf3 if=\cf4 "isdevinstance"\cf3 >\cf0 \
+		\cf5 <!--Set primary server url only in case of dev-->\cf0 \
+		\cf3 <echo\cf0  \cf3 message=\cf4 "Setting Server URL.."\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "$\{i3_env\}.$\{i3_dc\}.primary"\cf0  \cf3 value=\cf4 "http://$\{dsas_server_name\}:$\{dsas_server_port\}/snkp/CommonServlet"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "dsas_server_url"\cf0  \cf3 value=\cf4 "http://$\{dsas_server_name\}:$\{dsas_server_port\}/snkp/CommonServlet"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "i3RW_server_url"\cf0  \cf3 value=\cf4 "http://$\{i3w_server_name\}:$\{i3w_server_port\}/snkp/CommonServlet"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "MidOtp_server_url"\cf0  \cf3 value=\cf4 "http://$\{og_service_host1\}:$\{og_service_port\}/OtpGeneration/OtpServlet"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "MidOtp_server_url_1"\cf0  \cf3 value=\cf4 "http://$\{og_service_host2\}:$\{og_service_port\}/OtpGeneration/OtpServlet"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "MidOtp_server_url_ak"\cf0  \cf3 value=\cf4 "http://$\{ak_service_host\}:$\{ak_service_port\}/OtpGeneration/OtpServlet"\cf0  \cf3 />\cf0 \
+\
+	\cf3 </target>\cf0 \
+\
+	\cf3 <target\cf0  \cf3 name=\cf4 "setup"\cf0  \cf3 depends=\cf4 "copyconfig, setserverurl"\cf3 >\cf0 \
+		\cf3 <echo\cf0  \cf3 message=\cf4 "Setting Environment variables..."\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "I3_ENV"\cf0  \cf3 value=\cf4 "$\{i3_env\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "I3_DC"\cf0  \cf3 value=\cf4 "$\{i3_dc\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "I3RPC_SYS_DEBUG"\cf0  \cf3 value=\cf4 "true"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "AffinityServerUrl"\cf0  \cf3 value=\cf4 "http://$\{dsas_server_name\}:$\{dsas_server_port\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "RemAffinityServerUrl"\cf0  \cf3 value=\cf4 "http://$\{dsas_remote_aff_name\}:$\{dsas_remote_aff_port\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "sso.config.dir"\cf0  \cf3 value=\cf4 "$\{basedir\}/config"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "saci.config.dir"\cf0  \cf3 value=\cf4 "$\{basedir\}/config"\cf0  \cf3 />\cf0 \
+\cf5 <!--		<property name="javax.net.ssl.trustStore" value="$\{javax.net.ssl.trustStore\}" />\cf0 \
+\cf5 		<property name="javax.net.ssl.trustStorePassword" value="$\{javax.net.ssl.trustStorePassword\}" />\cf0 \
+\cf5 		<property name="snkp.service.url" value="http://$\{sso_server_name\}:$\{sso_server_port\}/jboss-net/services/SNKPService" />\cf0 \
+\cf5 		<property name="primary.snkp.service.url" value="http://$\{sso_server_name\}:$\{sso_server_port\}/jboss-net/services/SNKPService" />\cf0 \
+\cf5 		<property name="secondary.snkp.service.url" value="http://$\{sso_server_name\}:$\{sso_server_port\}/jboss-net/services/SNKPService" />\cf0 \
+\cf5 		<property name="SSO.$\{i3_env\}.$\{i3_dc\}.primary" value="http://$\{sso_server_name\}:$\{sso_server_port\}/snkp/CommonServlet" />  -->\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "$\{i3_env\}.$\{i3_dc\}.primary"\cf0  \cf3 value=\cf4 "http://$\{dsas_server_name\}:$\{dsas_server_port\}/snkp/CommonServlet"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "snkp.service.user.name"\cf0  \cf3 value=\cf4 "webuser"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "snkp.service.user.password"\cf0  \cf3 value=\cf4 "webpassword"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "ft.url"\cf0  \cf3 value=\cf4 "$\{test.url\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "test.servicename"\cf0  \cf3 value=\cf4 "$\{test.servicename\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "test.sso.realm"\cf0  \cf3 value=\cf4 "$\{test.sso.realm\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "test.ac.realm"\cf0  \cf3 value=\cf4 "$\{test.ac.realm\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "test.conf.path"\cf0  \cf3 value=\cf4 "$\{test.conf.path\}"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "cacheConf"\cf0  \cf3 value=\cf4 "$\{cache_conf\}"\cf0  \cf3 />\cf0 		\
+		\cf3 <property\cf0  \cf3 name=\cf4 "javax.net.ssl.trustStore"\cf0  \cf3 value=\cf4 "$\{basedir\}/config/certs/dsqa.jks"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "javax.net.ssl.trustStorePassword"\cf0  \cf3 value=\cf4 "Apple123"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "ssl.SocketFactory.provider"\cf0  \cf3 value=\cf4 "sun.security.ssl.SSLSocketFactoryImpl"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "ssl.ServerSocketFactory.provider"\cf0  \cf3 value=\cf4 "sun.security.ssl.SSLSocketFactoryImpl"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "https.protocols"\cf0  \cf3 value=\cf4 "TLSv1.2"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "SSO.$\{i3_env\}.$\{i3_dc\}.primary"\cf0  \cf3 value=\cf4 "http://$\{sso_server_name\}:$\{sso_server_port\}/snkp/CommonServlet"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "snkp.service.url"\cf0  \cf3 value=\cf4 "http://$\{sso_server_name\}:$\{sso_server_port\}/jboss-net/services/SNKPService"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "primary.snkp.service.url"\cf0  \cf3 value=\cf4 "http://$\{sso_server_name\}:$\{sso_server_port\}/jboss-net/services/SNKPService"\cf0  \cf3 />\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "secondary.snkp.service.url"\cf0  \cf3 value=\cf4 "http://$\{sso_server_name\}:$\{sso_server_port\}/jboss-net/services/SNKPService"\cf0  \cf3 />\cf0 \
+	\cf3 </target>\cf0 \
+\
+	\cf3 <target\cf0  \cf3 name=\cf4 "test-idms"\cf0  \cf3 depends=\cf4 "init, setup"\cf3 >\cf0 \
+		\cf5 <!-- data/testsuites/SAML/GenerateValidateSAMLSuite-->\cf0 \
+		\cf5 <!--data/testsuites/Princess/Princess_Test_Suite-->\cf0 \
+		\cf5 <!--data/testsuites/ApprovedDevices/ApprovedDevices_Suite-->\cf0 \
+		\cf5 <!--data/testsuites/test/ManageDevices_Suite-->\cf0 \
+		\cf3 <property\cf0  \cf3 name=\cf4 "testSuiteDir"\cf0  \cf3 value=\cf4 "data/testsuites/MaidAtApple/MaidAtApple_Suite"\cf0  \cf3 />\cf0 \
+		\cf3 <antcall\cf0  \cf3 target=\cf4 "hunterBuild.test"\cf0  \cf3 />\cf0 \
+	\cf3 </target>\cf0 \
+	\
+	\cf3 <target\cf0  \cf3 name=\cf4 "test-sso"\cf0  \cf3 depends=\cf4 "init,setup"\cf3 >\cf0 \
+				\cf3 <property\cf0  \cf3 name=\cf4 "testSuiteDir"\cf0  \cf3 value=\cf4 ""\cf0  \cf3 />\cf0 \
+				\cf3 <antcall\cf0  \cf3 target=\cf4 "hunterBuild.test"\cf0  \cf3 />\cf0 \
+	\cf3 </target>\cf0 \
+	\
+	\cf5 <!--data/testsuites/Davenport/Davenport_Suite,-->\cf0 \
+	\cf3 <target\cf0  \cf3 name=\cf4 "test-automation"\cf0  \cf3 depends=\cf4 "init,setup"\cf3 >\cf0 \
+				\cf3 <property\cf0  \cf3 name=\cf4 "testSuiteDir"\cf0  \cf3 value=\cf4 ""\cf0  \cf3 />\cf0 \
+				\cf3 <antcall\cf0  \cf3 target=\cf4 "hunterBuild.test"\cf0  \cf3 />\cf0 \
+		\cf3 </target>\cf0 \
+	\
+	\
+	\cf3 <target\cf0  \cf3 name=\cf4 "test-migration"\cf0  \cf3 depends=\cf4 "init,setup"\cf3 >\cf0 \
+		   \cf3 <property\cf0  \cf3 name=\cf4 "testSuiteDir"\cf0  \cf3 value=\cf4 "data/testsuites/SNKPDAWTokenVerification,\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf4 												data/testsuites/YubiKey,\cf0 \
+\cf4 												data/testsuites/2SV,\cf0 \
+\cf4 												data/testsuites/Authenticate,\cf0 \
+\cf4 												data/testsuites/ProfileServiceAuthenticate,\cf0 \
+\cf4 												data/testsuites/BiometricChangePassword,\cf0 \
+\cf4 												data/testsuites/DAWTokenvalidation,\cf0 \
+\cf4 												data/testsuites/GenevaCertificate,\cf0 \
+\cf4 												data/testsuites/GetCertificate,\cf0 \
+\cf4 												data/testsuites/GetChallengeQuestions_Suite,\cf0 \
+\cf4 												data/testsuites/GetDefaults,\cf0 \
+\cf4 												data/testsuites/Is2FactorCheckRequest,\cf0 \
+\cf4 												data/testsuites/KerberosAuthentication,\cf0 \
+\cf4 												data/testsuites/SaveGesturePreference,\cf0 \
+\cf4 												data/testsuites/SetChallengeQuestions,\cf0 \
+\cf4 												data/testsuites/ValidateServiceTicket,\cf0 \
+\cf4 												data/testsuites/2sv_DSReflectionTest,\cf0 \
+\cf4 												data/testsuites/ProvisionGesture,\cf0 \
+\cf4 												data/testsuites/SAML,\cf0 \
+\cf4 												data/testsuites/SaveAcctpreference,\cf0 \
+\cf4 												data/testsuites/verify 2SV,\cf0 \
+\cf4 		   										data/testsuites/FetchKeyChainDetails,\cf0 \
+\cf4 		   										data/testsuites/createOrUpdateEspressoTicket,\cf0 \
+\cf4 		   										data/testsuites/TokenVerification,\cf0 \
+\cf4 		   										data/testsuites/GetRule,\cf0 \
+\cf4 		   										data/testsuites/ValidateKDC_EAIAgent_Suite,\cf0 \
+\cf4 											   	data/testsuites/2SVTrustedDevice_Suite,\cf0 \
+\cf4 											   	data/testsuites/BioMetricAuthenticate,\cf0 \
+\cf4 											   	data/testsuites/LogFailure,\cf0 \
+\cf4 											   	data/testsuites/TokenVerify,\cf0 \
+\cf4 											   	data/testsuites/TOTP_testSuite,\cf0 \
+\cf4 		   										data/testsuites/DisableCredentials"\cf0  \cf3 />\cf0 \
+					\cf3 <antcall\cf0  \cf3 target=\cf4 "hunterBuild.test"\cf0  \cf3 />\cf0 \
+	\cf3 </target>\cf0 \
+	\
+	\cf3 <target\cf0  \cf3 name=\cf4 "generate-local-report"\cf3 >\cf0 \
+			\cf3 <exec\cf0  \cf3 dir=\cf4 ""\cf0  \cf3 executable=\cf4 "$\{basedir\}/allure.sh"\cf3 >\cf0 \
+				\cf3 <arg\cf0  \cf3 value=\cf4 "generate"\cf0  \cf3 />\cf0 \
+				\cf3 <arg\cf0  \cf3 value=\cf4 "$\{allure.results.directory\}"\cf0  \cf3 />\cf0 \
+				\cf3 <arg\cf0  \cf3 line=\cf4 "-v 1.4.16"\cf0  \cf3 />\cf0 \
+			\cf3 </exec>\cf0 \
+	\cf3 </target>\cf0 \
+\
+	\cf3 <target\cf0  \cf3 name=\cf4 "docgen"\cf3 >\cf0 \
+		\cf3 <antcall\cf0  \cf3 target=\cf4 "hunterBuild.docgen"\cf0  \cf3 />\cf0 \
+	\cf3 </target>\cf0 \
+	\
+	\
+	\cf3 <target\cf0  \cf3 name=\cf4 "all"\cf0  \cf3 depends=\cf4 "test-sso,generate-local-report"\cf0  \cf3 description=\cf4 "Execute the automate and report targets"\cf0  \cf3 />\cf0 \
+	\cf3 <target\cf0  \cf3 name=\cf4 "all-automation"\cf0  \cf3 depends=\cf4 "test-automation,generate-local-report"\cf0  \cf3 description=\cf4 "Execute the automate and report targets"\cf0  \cf3 />\cf0 \
+	\cf3 <target\cf0  \cf3 name=\cf4 "unit-test"\cf0  \cf3 depends=\cf4 "test-idms,generate-local-report"\cf0  \cf3 description=\cf4 "Execute the automate and report targets"\cf0  \cf3 />\cf0 \
+	\cf3 <target\cf0  \cf3 name=\cf4 "all-migration"\cf0  \cf3 depends=\cf4 "test-migration,generate-local-report"\cf0  \cf3 description=\cf4 "Execute the migrate and report targets"\cf0  \cf3 />\cf0 \
+	\
+\pard\pardeftab720\partightenfactor0
+\cf3 </project>\cf0 \
+}
